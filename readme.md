@@ -59,7 +59,7 @@ MspDir|String|这里是设置本地上传公钥模式下的用户自己生成的
 | :---: | :---: | :----------------- | :--------:|
 userName|String|bsn网络用户注册时的用户名|否
 nonce|String|随机字符串，使用base64编码的24位随机byte数据，在reqChaincode方法内部已经嵌入了设置nonce的方法，所以可以不需要再在调用的时候设置nonce。|是
-chainCode|String|bsn网络上调用智能合约的名称标识|是
+chainCode|String|bsn网络上调用智能合约的名称标识，目前的值是“cc_app0001202006081111440843077_00”|是
 funcName|String|要调用的智能合约的方法名称。一个智能合约可能有很多方法可供调用，所以要传入要调用的方法名称。具体每个智能合约方法名称在文档第三点中说明。|是
 args|String[]|调用智能合约的时候，可能需要往智能合约中传递参数。args字符串数组是传递给智能合约对应方法参数的json形式。当调用智能合约的方法不需要传入参数时，可以为空。<br>具体每个合约的每个方法的传入参数请看第三点。|否
 transientData|Map<String,String>|保存到bsn节点上的一个暂时性的键值对数据|否
@@ -69,34 +69,35 @@ transientData|Map<String,String>|保存到bsn节点上的一个暂时性的键�
 
 ```java
 //调用智能合约的 http请求对象
-        ReqKeyEscrow reqkey = new ReqKeyEscrow();
-        //需要传入到智能合约的参数，json字符串
-        //这里为了方便设置调用参数，根据现有的智能合约的参数， 创建了几个实体对象，通过fastjson让对象转变为json字符串然后再作为ReqKeyEscrow的args字段参数
-        Ticket ticket = new Ticket();
-        ticket.setType("test");
-        ticket.setUid("0001");
-        ticket.setName("testticket");
-        ticket.setDescription("only for test");
-        ticket.setStatus("ok");
-        String[] args = {JSON.toJSONString(ticket)};
-        //实际传递的args的json形式如下
-        //String[] args = {"{\"baseKey\":\"test2020068\",\"baseValue\":\"this is string \"}"};
-        //设置请求中的智能合约参数字段
-        reqkey.setArgs(params);
-        //设置请求中的智能合约方法名称字段
-        reqkey.setFuncName("createTicket");
-        //设置调用智能合约的名称标识
-        reqkey.setChainCode("cc_app0001202006081111440843077_00");
-        //可以设置调用者名称，也可以不设置
-//        reqkey.setUserName("test21");
-        //调用的暂态数据，暂时用不上
-        //reqkey.setTransientData(null);
+@Test
+    public void reqCreateBusinessActivity() {
         try {
-            //正式调用
+            initConfig();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ;
+        }
+        ReqKeyEscrow reqkey = new ReqKeyEscrow();
+//        String[] args = {"test"};
+        Business business = new Business();
+        business.setUid("0001");
+        business.setBid("test01");
+        business.setMenu("test01");
+        business.setActivity("actest01");
+        business.setFunds("100");
+        business.setCreate_time("testdate");
+        String[] args = {JSON.toJSONString(business)};
+        reqkey.setArgs(args);
+        reqkey.setFuncName("createBusinessActivity");
+        reqkey.setChainCode("cc_app0001202006081111440843077_00");
+//        reqkey.setUserName("test21");
+        reqkey.setTransientData(null);
+        try {
             TransactionService.reqChainCode(reqkey);
-        } catch(GlobalException  | IOException e) {
+        } catch(GlobalException | IOException e) {
             e.printStackTrace();
         }
+    }
 
 
 ```
@@ -157,11 +158,6 @@ ccRes字段：
 
 # 4、智能合约方法及参数说明
 
-目前智能合约提供三个业务逻辑的处理，包括：
-1. 对人才档案信息的上链保存;
-2. 对人才申请政策记录的上链保存；
-3. 对政策发放记录的上链保存。
-
 为方便参数的传递，在bsn-java-sdk中的chaincodeEntities包中，封装了要传递的参数的java类，当需要将参数传递给智能合约时，只需要创建一个对象实例，然后通过JSON.toJSONString，将对象序列化为json字符串，然后传入第二点中提到的args参数即可。
 
 ## 4-1 人才数据智能合约方法名称及参数说明
@@ -169,52 +165,64 @@ ccRes字段：
 方法名称|功能|参数类型|参数含义|返回值类型|返回值|备注
 | :---: | :---: | :---: | :---: | :---: | :---| :---: |
 createProfile|保存人才数据到区块链上|String[]|Profile类的json序列化字符串|String|成功返回OK，否则返回Error的信息
-getProfile|查询人才数据|String[]|Profile类的id，json序列化字符串|String|成功则返回Profile的各个字段；否则返回Error的信息
+getProfileByID|查询人才数据|String[]|Profile类的id，json序列化字符串|String|成功则返回Profile的各个字段；否则返回Error的信息
 updateProfile|更新人才数据|String[]|Profile类的json序列化字符串|String|成功则返回OK；否则返回Error的信息
-
+deleteProfile|删除人才数据|String[]|Profile类的json序列化字符串|String|成功则返回OK；否则返回Error的信息
+getProfileHistory|查询人才档案的历史修改记录|String[]|Profile类的id，json序列化字符串|String|成功返回历史记录的数据结构，否则返回Error信息
 ---
 
 bsn-java-sdk中的人才数据实体类：
 
 ```java
 public class Profile {
-    //Type string `json:"type"`
-    //	Id string `json:"id"`
-    //	Name string `json:"name"`
-    //	Sex string `json:"sex"`
-    //	PoliticalStatus string `json:"politicalStatus"`
+    //|      id       |  Long  | 人才id                        |
+    //|     name      | String | 姓名                          |
+    //| identity_card | String | 身份证hash值                  |
+    //|   card_type   |  int   | 证件类型 1：身份证；2：护照； |
+    //|   passport    | String | 护照hash值                    |
+    //|    open_id    | String | 微信唯一标识                  |
+    //|    wx_card    | String | 微信会员卡id                  |
+    //|  wx_card_num  | String | 会员卡号                      |
+    //|    action     | String | 用户动作                      |
+    //|    module     | String | 用户使用模块                  |
+    //| extra | String | 扩展字段 |
 
 
-    public Profile(String type, String id, String name) {
-        this.type = type;
-        this.id = id;
-        this.name = name;
-    }
-
-    @JSONField(name = "type")
-    String type;
-
-    @JSONField(name = "id")
-    String id;
-
-    @JSONField(name = "name")
-    String name;
-
-    @JSONField(name = "sex")
-    String sex;
-
-    @JSONField(name = "politicalStatus")
-    String politicalStatus;
+        @JSONField(name = "id")
+        String id;
+    
+        @JSONField(name = "name")
+        String name;
+    
+        @JSONField(name = "identity_card_Hash")
+        String identity_card;
+    
+        @JSONField(name = "card_type")
+        String card_type;
+    
+        @JSONField(name = "passport")
+        String passport;
+    
+        @JSONField(name = "wx_openid")
+        String openid;
+    
+        @JSONField(name = "wx_card")
+        String wx_card;
+    
+        @JSONField(name = "wx_card_num")
+        String wx_card_num;
+    
+        @JSONField(name = "action")
+        String action;
+    
+        @JSONField(name = "module")
+        String module;
+    
+        @JSONField(name = "extra")
+        String extra;
 }
 ```
 
-字段|类型|含义|必填
-|:---:|:---:| :--- |:---|
-type|String|人才类型|是
-id|String|人才档案的唯一标识|是
-name|String|人才的姓名资料|是
-sex|String|性别|否
-politicalStatus|String|政治面貌|否
 
 ---
 ## 4-2 人才申请政策智能合约参数字段说明：
@@ -223,80 +231,121 @@ politicalStatus|String|政治面貌|否
 | :---: | :---: | :---: | :---: | :---: | :---| :---: |
 apply|人才发起政策申请|String[]|Application类的json序列化字符串|String|如果成功返回OK，否则返回Error的具体信息|
 getApplicationInfo|查询某次申请的详细信息|String[]|Application类的id,json序列化字符串|String|返回Application类的各个字段
+updateApplication|更新申请政策各个字段|String[]|Application类的json序列化字符串|String|如果成功返回历史状态结构，否则返回Error的具体信息|
 getHistoryForApplication|追溯某次申请的状态更改历史|String[]|Application类的json序列化字符串|String|如果成功返回历史状态结构，否则返回Error的具体信息|
 
 ---
 bsn-java-sdk中的人才申请实体类：
 ```java
 public class Application {
-    //UID string `json:"applicationUid"`
-    //	PID string `json:"pid"`
-    //	ApplyFor string `json:"applyFor"`
-    //	Status string `json:"status"`
+//| id     | String | 申请唯一id |
+//| uid    | String | 人才id     |
+//| pid    | String | 政策id     |
+//| policy | String | 政策名称   |
+//| status | String | 申请状态   |
+//| ap_id  | String | 审批人id   |
+//| extra | String | 扩展字段 |
 
-    @JSONField(name = "applicationUid")
-    String applicationUid;
+    //申请唯一id
+    @JSONField(name = "id")
+    String id;
 
-    //profile id
+    //人才id
+    @JSONField(name = "uid")
+    String uid;
+    //政策id
     @JSONField(name = "pid")
     String pid;
 
-    @JSONField(name = "applyFor")
-    String applyFor;
+    //政策名称
+    @JSONField(name = "policy")
+    String policy;
+
+//    申请状态
     @JSONField(name = "status")
     String status;
+
+//    审批人id
+    @JSONField(name = "ap_id")
+    String ap_id;
+
+    public Application() {
+    }
+
+    //拓展字段
+    @JSONField(name = "extra")
+    String extra;
+
 }
+
 ```
 
-
-字段|类型|含义|必填
-|:---:|:---:| :--- |:---|
-applicationUid|String|申请事务的唯一ID|是|
-pid|String|人才数据的唯一ID|是|
-applyFor|String|申请政策的名称|是|
-Status|String|申请政策的状态|否
 
 ---
 ## 4-3 政府部门审批发放政策智能合约参数字段说明：
 
-目前字段包括applicationUid、pid、name、status几项。若有需要可以再往智能合约中添加字段，并在Java-sdk中对应的实体类添加字段。
+
 
 方法名称|功能|参数类型|参数含义|返回值类型|返回值|备注
 | :---: | :---: | :---: | :---: | :---: | :---| :---: |
-createTicket|创建政策数据到区块链上|String[]|Ticket类的json序列化字符串|String|成功返回OK，否则返回Error的信息
-getTicketInfo|查询政策数据状态|String[]|Ticket类的id，json序列化字符串|String|成功则返回Ticket的各个字段；否则返回Error的信息
-changeTicket|更新政策数据状态|String[]|Ticket类的json序列化字符串|String|成功则返回OK；否则返回Error的信息
-invokeTicket|核销删除政策信息|String[]|Ticket类的json序列化字符串|String|成功则返回OK；否则返回Error的信息
-getHistoryForTicketStatus|追溯政策发放过程的状态改变|String[]|Ticket类的id，json序列化字符串|String|成功则返回历史状态结构；否则返回Error的信息
+createBusinessActivity|创建政策数据到区块链上|String[]|Business类的json序列化字符串|String|成功返回OK，否则返回Error的信息
+getBusinessActivityInfoByUID|查询政策数据状态|String[]|Business类的id，json序列化字符串|String|成功则返回Business的各个字段；否则返回Error的信息
+updateBusinessActivity|更新政策数据状态|String[]|Business类的json序列化字符串|String|成功则返回OK；否则返回Error的信息
+deleteBusinessActivity|核销删除政策信息|String[]|Business类的json序列化字符串|String|成功则返回OK；否则返回Error的信息
+getBusinessActivityHistory|追溯政策发放过程的状态改变|String[]|Business类的id，json序列化字符串|String|成功则返回历史状态结构；否则返回Error的信息
 
 ---
-bsn-java-sdk中的政策的Ticket实体类：
+bsn-java-sdk中的政策的Business实体类：
 ```java
-public class Ticket {
-    @JSONField(name = "type")
-    String type;
+public class Business {
 
-    @JSONField(name = "ticketUid")
+//| uid         | String | 人才id       |
+//| bid | String | 商业活动id |
+//| menu    | String | 商业活动目录 |
+//| activity    | String | 商业活动名称 |
+//| funds       | String | 金额         |
+//| create_time | String | 创建时间     |
+//| extra | String | 扩展字段 |
+
+
+    public Business() {
+
+    }
+
+    public Business(String uid, String bid, String menu, String activity, String funds, String create_time, String extra) {
+        this.uid = uid;
+        this.bid = bid;
+        this.menu = menu;
+        this.activity = activity;
+        this.funds = funds;
+        this.create_time = create_time;
+        this.extra = extra;
+    }
+
+    @JSONField(name = "uid")
     String uid;
 
-    @JSONField (name = "ticketName")
-    String name;
+    @JSONField(name = "bid")
+    String bid;
 
-    @JSONField(name = "description")
-    String description;
+    @JSONField(name = "menu")
+    String menu;
 
-    @JSONField(name = "status")
-    String status;
+    @JSONField(name = "activity")
+    String activity;
+
+    @JSONField(name = "funds")
+    String funds;
+
+    @JSONField(name = "create_time")
+    String create_time;
+
+    @JSONField(name = "extra")
+    String extra;
 }
 ```
 
-字段|类型|含义|必填
-|:---:|:---:| :--- |:---|
-type|String|一次申请事务的唯一标识id
-uid|String|人才对应的唯一标识id
-name|String|申请政策的名称
-description|String|对政策内容的详情描述|
-status|String|政策的状态，比如审批中、通过、不通过等。
+
 ---
 ## 4-4 历史状态结构返回信息参数说明：
 

@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 import com.alibaba.fastjson.JSON;
-import com.chaincodeEntities.Ticket;
+import com.chaincodeEntities.Business;
 import org.junit.jupiter.api.Test;
 
 import com.bsnbase.sdk.client.fabric.service.ChainCodeService;
@@ -35,7 +35,7 @@ public class FabricTest {
 //        config.initConfig(config);
 //	}
 
-	//初始化config    SM2
+	//初始化config
 	public void initConfig() throws IOException {
 		Config config = new Config();
 		config.setAppCode("app0001202006081111440843077");
@@ -88,16 +88,17 @@ public class FabricTest {
 		}
     	ReqKeyEscrow reqkey = new ReqKeyEscrow();
 //        String[] args = {"test"};
-        Ticket ticket = new Ticket();
-        ticket.setType("test");
-        ticket.setUid("0001");
-        ticket.setName("testticket");
-        ticket.setDescription("only for test");
-        ticket.setStatus("ok");
-        String[] args = {JSON.toJSONString(ticket)};
+        Business business = new Business();
+        business.setUid("0001");
+        business.setBid("test01");
+        business.setMenu("test01");
+        business.setActivity("actest01");
+        business.setFunds("100");
+        business.setCreate_time("testdate");
+        String[] args = {JSON.toJSONString(business)};
 //		String[] args = {"test"};
         reqkey.setArgs(args);
-        reqkey.setFuncName("getHistoryForTicketStatus");
+        reqkey.setFuncName("getBusinessActivityInfoByUID");
         reqkey.setChainCode("cc_app0001202006081111440843077_00");
 //        reqkey.setUserName("test21");
         reqkey.setTransientData(null);
