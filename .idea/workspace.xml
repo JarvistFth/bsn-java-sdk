@@ -23,25 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39798ece-6a2c-43f6-9d00-cb6a9f2161d1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/bsn_sdk_java_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/bsn_sdk_java_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_20_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_20_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_7_0_RC1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_7_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chaincodeEntities/Selector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bsn-sdk-java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bsn-sdk-java.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chaincodeEntities/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chaincodeEntities/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chaincodeEntities/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chaincodeEntities/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chaincodeEntities/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chaincodeEntities/Business.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/test/CCEntitiesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/CCEntitiesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/FabricTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/FabricTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/bsn-sdk-java.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/bsn-sdk-java.kotlin_module" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,15 +41,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>userEnroll</find>
-      <find>req</find>
-      <find>发送数据格式</find>
-      <find>toString</find>
-      <find>reqBody</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,6 +68,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -114,45 +90,53 @@
       <recent name="F:\ideaProject\PCNGateway-Java-SDK\src\main\resources\certs\gatewayCert" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FabricTest.reqChainCode">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CCEntitiesTest.reqGetApplicationInfoByUID">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CCEntitiesTest.reqCreateTicketChainCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CCEntitiesTest.reqApply" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bsn-sdk-java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CCEntitiesTest" />
-      <option name="METHOD_NAME" value="reqCreateTicketChainCode" />
+      <option name="METHOD_NAME" value="reqApply" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CCEntitiesTest.reqGetTicketChainCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CCEntitiesTest.reqCreateProfile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bsn-sdk-java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CCEntitiesTest" />
-      <option name="METHOD_NAME" value="reqGetTicketChainCode" />
+      <option name="METHOD_NAME" value="reqCreateProfile" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CCEntitiesTest.testEntitiesToJson" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CCEntitiesTest.reqGetApplicationInfoByUID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bsn-sdk-java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CCEntitiesTest" />
-      <option name="METHOD_NAME" value="testEntitiesToJson" />
+      <option name="METHOD_NAME" value="reqGetApplicationInfoByUID" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CCEntitiesTest.reqGetProfileByID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bsn-sdk-java" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CCEntitiesTest" />
+      <option name="METHOD_NAME" value="reqGetProfileByID" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -160,12 +144,6 @@
     </configuration>
     <configuration name="FabricTest.reqChainCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bsn-sdk-java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="FabricTest" />
       <option name="METHOD_NAME" value="reqChainCode" />
@@ -174,23 +152,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FabricTest.userRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="bsn-sdk-java" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="FabricTest" />
-      <option name="METHOD_NAME" value="userRegister" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CCEntitiesTest.reqGetApplicationInfoByUID" />
+        <item itemvalue="JUnit.CCEntitiesTest.reqGetProfileByID" />
+        <item itemvalue="JUnit.CCEntitiesTest.reqApply" />
         <item itemvalue="JUnit.FabricTest.reqChainCode" />
-        <item itemvalue="JUnit.FabricTest.userRegister" />
-        <item itemvalue="JUnit.CCEntitiesTest.reqGetTicketChainCode" />
-        <item itemvalue="JUnit.CCEntitiesTest.reqCreateTicketChainCode" />
-        <item itemvalue="JUnit.CCEntitiesTest.testEntitiesToJson" />
+        <item itemvalue="JUnit.CCEntitiesTest.reqCreateProfile" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +180,8 @@
       <workItem from="1598337145981" duration="8651000" />
       <workItem from="1602143923841" duration="726000" />
       <workItem from="1602144660651" duration="2016000" />
-      <workItem from="1602401396083" duration="2457000" />
+      <workItem from="1602401396083" duration="2829000" />
+      <workItem from="1602812702587" duration="8161000" />
     </task>
     <servers />
   </component>
@@ -244,22 +213,38 @@
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
     <state x="743" y="312" width="424" height="485" key="FileChooserDialogImpl/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602144021815" />
-    <state width="1866" height="272" key="GridCell.Tab.0.bottom" timestamp="1602403242323">
+    <state width="1866" height="269" key="GridCell.Tab.0.bottom" timestamp="1602828395392">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1866" height="272" key="GridCell.Tab.0.bottom/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602403242323" />
-    <state width="1866" height="272" key="GridCell.Tab.0.center" timestamp="1602403242323">
+    <state width="1866" height="269" key="GridCell.Tab.0.bottom/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602828395392" />
+    <state width="1866" height="269" key="GridCell.Tab.0.center" timestamp="1602828395392">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1866" height="272" key="GridCell.Tab.0.center/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602403242323" />
-    <state width="1866" height="272" key="GridCell.Tab.0.left" timestamp="1602403242323">
+    <state width="1866" height="269" key="GridCell.Tab.0.center/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602828395392" />
+    <state width="1866" height="269" key="GridCell.Tab.0.left" timestamp="1602828395391">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1866" height="272" key="GridCell.Tab.0.left/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602403242323" />
-    <state width="1866" height="272" key="GridCell.Tab.0.right" timestamp="1602403242323">
+    <state width="1866" height="269" key="GridCell.Tab.0.left/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602828395391" />
+    <state width="1866" height="269" key="GridCell.Tab.0.right" timestamp="1602828395392">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state width="1866" height="272" key="GridCell.Tab.0.right/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602403242323" />
+    <state width="1866" height="269" key="GridCell.Tab.0.right/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602828395392" />
+    <state width="1866" height="336" key="GridCell.Tab.1.bottom" timestamp="1602826496012">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1866" height="336" key="GridCell.Tab.1.bottom/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602826496012" />
+    <state width="1866" height="336" key="GridCell.Tab.1.center" timestamp="1602826496012">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1866" height="336" key="GridCell.Tab.1.center/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602826496012" />
+    <state width="1866" height="336" key="GridCell.Tab.1.left" timestamp="1602826496012">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1866" height="336" key="GridCell.Tab.1.left/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602826496012" />
+    <state width="1866" height="336" key="GridCell.Tab.1.right" timestamp="1602826496012">
+      <screen x="0" y="28" width="1920" height="1052" />
+    </state>
+    <state width="1866" height="336" key="GridCell.Tab.1.right/0.28.1920.1052/1920.0.1280.720@0.28.1920.1052" timestamp="1602826496012" />
     <state x="493" y="212" width="924" height="685" key="Maven.ArtifactSearchDialog" timestamp="1602145060086">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>

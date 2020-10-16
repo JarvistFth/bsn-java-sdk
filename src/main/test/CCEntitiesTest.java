@@ -45,7 +45,7 @@ public class CCEntitiesTest {
         ReqKeyEscrow reqkey = new ReqKeyEscrow();
 //        String[] args = {"test"};
         Business business = new Business();
-        business.setUid("0001");
+        business.setUid("profile_0001");
         business.setBid("test01");
         business.setMenu("test01");
         business.setActivity("actest01");
@@ -100,7 +100,7 @@ public class CCEntitiesTest {
         ReqKeyEscrow reqkey = new ReqKeyEscrow();
 //        String[] args = {"test"};
         Profile profile = new Profile();
-        profile.setId("0001");
+        profile.setId("test01");
         profile.setOpenid("test01");
         profile.setIdentity_card("test01");
         profile.setAction("actest01");
@@ -131,7 +131,7 @@ public class CCEntitiesTest {
         ReqKeyEscrow reqkey = new ReqKeyEscrow();
 //        String[] args = {"test"};
         Profile profile = new Profile();
-        profile.setId("0001");
+        profile.setId("test01");
         String[] args = {JSON.toJSONString(profile)};
         reqkey.setArgs(args);
         reqkey.setFuncName("getProfileByID");
@@ -158,6 +158,7 @@ public class CCEntitiesTest {
         Application application = new Application();
         application.setId("applicationtest01");
         application.setAp_id("test01");
+        application.setUid("profile_test01");
         application.setPid("appid01");
         application.setPolicy("policy01");
         application.setStatus("success");
@@ -190,6 +191,61 @@ public class CCEntitiesTest {
         String[] args = {JSON.toJSONString(application)};
         reqkey.setArgs(args);
         reqkey.setFuncName("getApplicationInfo");
+        reqkey.setChainCode("cc_app0001202006081111440843077_00");
+//        reqkey.setUserName("test21");
+        reqkey.setTransientData(null);
+        try {
+            TransactionService.reqChainCode(reqkey);
+        } catch(GlobalException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void reqGetApplicationInfoByUID(){
+        try {
+            initConfig();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ;
+        }
+        ReqKeyEscrow reqkey = new ReqKeyEscrow();
+        String k = "pid";
+        String v = "appid01";
+
+        //构造查询selector语句
+        String []args = {String.format("{\"selector\":{\"%s\":\"%s\"}}",k,v)};
+        //将构造好的查询语句传入智能合约调用参数中
+        reqkey.setArgs(args);
+        //调用GetQueryResult方法
+        reqkey.setFuncName("GetQueryResult");
+        reqkey.setChainCode("cc_app0001202006081111440843077_00");
+//        reqkey.setUserName("test21");
+        reqkey.setTransientData(null);
+        try {
+            TransactionService.reqChainCode(reqkey);
+        } catch(GlobalException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void reqGetApplicationInfoByPID(){
+        try {
+            initConfig();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ;
+        }
+        ReqKeyEscrow reqkey = new ReqKeyEscrow();
+        String k = "pid";
+        String v = "appid01";
+        //构造查询selector语句
+        String []args = {String.format("{\"selector\":{\"%s\":\"%s\"}}",k,v)};
+        //将构造好的查询语句传入智能合约调用参数中
+        reqkey.setArgs(args);
+        //调用GetQueryResult方法
+        reqkey.setFuncName("GetQueryResult");
         reqkey.setChainCode("cc_app0001202006081111440843077_00");
 //        reqkey.setUserName("test21");
         reqkey.setTransientData(null);
